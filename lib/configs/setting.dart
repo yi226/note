@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:note/utils/io.dart' as io;
 
 class Setting extends ChangeNotifier {
   /// Single instance
@@ -14,10 +13,10 @@ class Setting extends ChangeNotifier {
 
   /// initialize
   Setting._internal() {
-    init();
+    _init();
   }
 
-  init() async {
+  _init() async {
     _colorSchemeSeed = Colors.blue;
     _theme = ThemeData(
       brightness: Brightness.light,
@@ -26,18 +25,34 @@ class Setting extends ChangeNotifier {
     );
   }
 
+  @override
+  String toString() {
+    return super.toString();
+  }
+
   late Color _colorSchemeSeed;
   late ThemeData _theme;
   ThemeData get theme => _theme;
+  bool get isLight => _theme.brightness == Brightness.light;
+  bool get isMaterial3 => _theme.useMaterial3;
+  Color get colorSchemeSeed => _colorSchemeSeed;
   changeTheme({
     Brightness? brightness,
+    bool? isLight,
     bool? useMaterial3,
     Color? colorSchemeSeed,
   }) {
+    if (isLight != null) {
+      brightness = isLight ? Brightness.light : Brightness.dark;
+    }
+    if (colorSchemeSeed != null) {
+      _colorSchemeSeed = colorSchemeSeed;
+    }
     _theme = ThemeData(
       brightness: brightness ?? theme.brightness,
       useMaterial3: useMaterial3 ?? theme.useMaterial3,
       colorSchemeSeed: colorSchemeSeed ?? _colorSchemeSeed,
     );
+    notifyListeners();
   }
 }

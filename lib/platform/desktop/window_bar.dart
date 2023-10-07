@@ -12,52 +12,39 @@ class WindowBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        shape: BoxShape.rectangle,
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(75, 158, 158, 158),
-            offset: Offset(1, 1),
-            blurRadius: 3,
-          ),
-        ],
-        color: Color(0xe3eef9ff),
-      ),
-      child: PreferredSize(
-        preferredSize: const Size.fromHeight(40.0),
-        child: Row(children: [
-          WindowTitleBarBox(
-            child: MoveWindow(
-                child: Padding(
-              padding: const EdgeInsets.only(left: 9, right: 9),
-              child: logo,
-            )),
-          ),
-          WindowTitleBarBox(
-            child: MoveWindow(
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(40.0),
+      child: Row(children: [
+        WindowTitleBarBox(
+          child: MoveWindow(
               child: Padding(
-                padding: const EdgeInsets.only(left: 9, right: 9),
-                child: title,
-              ),
+            padding: const EdgeInsets.only(left: 9, right: 9),
+            child: logo,
+          )),
+        ),
+        WindowTitleBarBox(
+          child: MoveWindow(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 9, right: 9),
+              child: title,
             ),
           ),
-          Expanded(
-            child: Column(
-              children: [
-                WindowTitleBarBox(
-                  child: Row(
-                    children: [
-                      Expanded(child: MoveWindow()),
-                      const WindowButtons(),
-                    ],
-                  ),
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              WindowTitleBarBox(
+                child: Row(
+                  children: [
+                    Expanded(child: MoveWindow()),
+                    const WindowButtons(),
+                  ],
                 ),
-              ],
-            ),
-          )
-        ]),
-      ),
+              ),
+            ],
+          ),
+        )
+      ]),
     );
   }
 }
