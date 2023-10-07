@@ -75,7 +75,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                 color: setting.colorSchemeSeed,
                 // Update the screenPickerColor using the callback.
                 onColorChanged: (Color color) {
-                  print(color);
+                  // print(color);
                   setting.changeTheme(colorSchemeSeed: color);
                 },
                 width: 30,
