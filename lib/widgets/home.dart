@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note/widgets/func.dart';
-import 'package:note/platform/window_bar.dart';
+import 'package:note/widgets/window.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

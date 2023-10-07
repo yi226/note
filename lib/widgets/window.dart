@@ -1,5 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:note/utils/io.dart' as io;
 
 class WindowBar extends StatelessWidget implements PreferredSizeWidget {
   const WindowBar({super.key, required this.logo, required this.title});
@@ -12,40 +13,57 @@ class WindowBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(40.0),
-      child: Row(children: [
-        WindowTitleBarBox(
-          child: MoveWindow(
-              child: Padding(
-            padding: const EdgeInsets.only(left: 9, right: 9),
-            child: logo,
-          )),
-        ),
-        WindowTitleBarBox(
-          child: MoveWindow(
-            child: Padding(
+    if (io.isDesktop) {
+      return PreferredSize(
+        preferredSize: const Size.fromHeight(40.0),
+        child: Row(children: [
+          WindowTitleBarBox(
+            child: MoveWindow(
+                child: Padding(
               padding: const EdgeInsets.only(left: 9, right: 9),
-              child: title,
+              child: logo,
+            )),
+          ),
+          WindowTitleBarBox(
+            child: MoveWindow(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 9, right: 9),
+                child: title,
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Column(
-            children: [
-              WindowTitleBarBox(
-                child: Row(
-                  children: [
-                    Expanded(child: MoveWindow()),
-                    const WindowButtons(),
-                  ],
+          Expanded(
+            child: Column(
+              children: [
+                WindowTitleBarBox(
+                  child: Row(
+                    children: [
+                      Expanded(child: MoveWindow()),
+                      const WindowButtons(),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
+          )
+        ]),
+      );
+    } else {
+      return PreferredSize(
+        preferredSize: const Size.fromHeight(40.0),
+        child: Row(children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 9, right: 9),
+            child: logo,
           ),
-        )
-      ]),
-    );
+          Padding(
+            padding: const EdgeInsets.only(left: 9, right: 9),
+            child: title,
+          ),
+          Expanded(child: Container()),
+        ]),
+      );
+    }
   }
 }
 
